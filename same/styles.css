@@ -1,0 +1,224 @@
+html * {
+	font-family: Arial !important;
+	font-size: x-large;
+}
+
+body {
+	background-color: #EEEEEE;
+}
+
+#loader {
+	display: block;
+	position: absolute;
+	top: 0px;
+	right: 0px;
+	width: 100%;
+	height: 100%;
+}
+#loadImage {
+	position: absolute;
+	left: 50%;
+	top: 50%;
+	width: 100%;
+	height: 100%;
+}
+#loadCount {
+	position: absolute;
+	right: 10px;
+	top: 10px;
+}
+#table {
+	position: absolute;
+	top: 50%;
+	right: 10%;
+}
+#results {
+	position: absolute;
+	width: 600px;
+	height: 75px;
+	bottom: 33%;
+	right: 25px;
+}
+.resultsText {
+	display: none;
+	position: absolute;
+	right: 0px;
+	font-size: 70px;
+	font-weight: bold;
+	-webkit-text-stroke: 3px black;
+}
+#textSame {
+	color: green;
+}
+#textNSame {
+	color: red;
+}
+
+.card {
+	position: absolute;
+	-webkit-transition: all .1s ease-in-out;
+	-moz-transition: all .1s ease-in-out;
+	-o-transition: all .1s ease-in-out;
+	transition: all .1s ease-in-out;
+}
+#cardL {
+	left: 0px;
+}
+#cardR {
+	right: 0px;
+}
+#cardC {
+	width: 100%;
+	height: 100%;
+}
+#cardCDiv {
+	display: none;
+	top: 50%;
+}
+
+.cardContent {
+	position: absolute;
+}
+
+.border {
+	position: absolute;
+	width: 100%;
+	height: 100%
+}
+#borderL {
+	left: 0px;
+}
+#borderR {
+	right: 0px;
+}
+
+.bigButt {
+	background: transparent;
+	font-size: 50px;
+	width: 100%;
+	height: 100%;
+}
+.biggestButt {
+	background: transparent;
+	font-size: 50px;
+	right: 0px;
+	width: 100%;
+	height: 100%;
+}
+.biggestButt2 {
+	background: transparent;
+	font-size: 50px;
+	right: 0px;
+	width: 100%;
+	height: 100%;
+	-webkitTransform: rotate(180deg); 
+	-mozTransform: rotate(180deg); 
+	-msTransform: rotate(180deg); 
+	-oTransform: rotate(180deg); 
+	transform: rotate(180deg);
+}
+#buttBegin {
+	position: absolute;
+	width: 75%;
+	height: 25%;
+	bottom: 25px;
+	right: 25px;
+}
+#buttBegin2 {
+	display: none;
+	position: absolute;
+	width: 75%;
+	height: 25%;
+	top: 25px;
+	right: 25px;
+}
+.buttsHolder {
+	display: none;
+	position: absolute;
+	width: 75%;
+	height: 25%;
+}
+#butts {
+	bottom: 25px;
+	right: 25px;
+}
+#butts2 {
+	top: 25px;
+	right: 25px;
+	-webkitTransform: rotate(180deg); 
+	-mozTransform: rotate(180deg); 
+	-msTransform: rotate(180deg); 
+	-oTransform: rotate(180deg); 
+	transform: rotate(180deg);
+}
+.buttSameDiv {
+	position: absolute;
+	width: 100%;
+	height: 100%;
+}
+#buttSame2 {
+	-webkitTransform: rotate(180deg); 
+	-mozTransform: rotate(180deg); 
+	-msTransform: rotate(180deg); 
+	-oTransform: rotate(180deg); 
+	transform: rotate(180deg);
+}
+#buttRestart {
+	position: absolute;
+	width: 50%;
+	height: 100%;
+	top: 0px;
+	right: 0px;
+}
+#buttResume {
+	position: absolute;
+	width: 50%;
+	height: 100%;
+	top: 0px;
+	left: 0px;
+}
+#buttYay {
+	position: absolute;
+	width: 50%;
+	height: 100%;
+	top: 0px;
+	left: 0px;
+}
+
+.divbox {
+	position: absolute;
+}
+#divbox_delay {
+	width: 215px;
+	height: 25px;
+}
+#tb_delay {
+	position: absolute;
+	width: 80px;
+	top: 0px;
+	right: 0px;
+}
+#divbox_random {
+	width: 335px;
+	height: 25px;
+}
+#tb_random {
+	position: absolute;
+	width: 60px;
+	top: 0px;
+	right: 0px;
+}
+#divbox_color {
+	width: 335px;
+	height: 25px;
+}
+#tb_color {
+	position: absolute;
+	width: 60px;
+	top: 4px;
+	right: 0px;
+}
+#bottomdiv {
+	position: absolute;
+	bottom: 25px;
+}
