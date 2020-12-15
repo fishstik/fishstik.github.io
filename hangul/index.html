@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta name="apple-mobile-web-app-capable" content="yes" />
+		<meta name="mobile-web-app-capable" content="yes">
+		<title>hangul</title>
+
+		<script>
+			window.onload = function () {
+				var i, j, k;
+				var body = document.getElementsByTagName('body')[0];
+
+				// Create areas for maps
+				for (i = 0; i < 2; i++) {
+					var map = document.getElementById("map{0}".format(i));
+					var start_x = [127, 125];
+					var start_y = [100, 106];
+					var size_x = [78.5, 78.5];
+					var size_y = [69.5, 76.5];
+					var rows = [11, 10]
+					for (j = 0; j < 14; j++) {
+						for (k = 0; k < rows[i]; k++) {
+							var area = document.createElement("area");
+							area.shape = "rect";
+							area.href = "#!";
+							area.coords = "{0},{1},{2},{3}".format(start_x[i]+size_x[i]*j,
+																				start_y[i]+size_y[i]*k,
+																				start_x[i]+size_x[i]*(j+1),
+																				start_y[i]+size_y[i]*(k+1));
+							area.setAttribute('onclick', "playaudio({0}, {1}, {2})".format(i, k, j));
+							map.appendChild(area);
+						}
+					}
+				}
+
+				// Third map special case
+				var map = document.getElementById("map2");
+				var start_x = 127;
+				var start_y = 100;
+				var size_x = 78.5;
+				var size_y = 75;
+				var cols = [9, 8, 7, 6, 4];
+				for (j = 0; j < 5; j++) {
+					for (k = 0; k < cols[j]; k++) {
+						var area = document.createElement("area");
+						area.shape = "rect";
+						area.href = "#!";
+						area.coords = "{0},{1},{2},{3}".format(start_x+size_x*k,
+																			start_y+size_y*j,
+																			start_x+size_x*(k+1),
+																			start_y+size_y*(j+1));
+						area.setAttribute('onclick', "playaudio(2, {0}, {1})".format(j, k));
+						map.appendChild(area);
+					}
+				}
+
+				// add mouseover
+				var areas = document.getElementsByTagName('area');
+				for (var index = 0; index < areas.length; index++) {    
+					areas[index].addEventListener('mouseover', function () {this.focus({preventScroll: true});}, false);
+				};
+
+				// Dynamic map size
+				var ImageMap = function(map, img) {
+					var n,
+						areas = map.getElementsByTagName('area'),
+						len = areas.length,
+						coords = [],
+						previousWidth = 1266;
+					for (n = 0; n < len; n++) {
+						coords[n] = areas[n].coords.split(',');
+					}
+					window.addEventListener('resize', e => this.resize(e));
+					this.resize;
+
+					this.resize = function () {
+						var n, m, clen,
+							 x = img.offsetWidth / previousWidth;
+						for (n = 0; n < len; n++) {
+							 clen = coords[n].length;
+							 for (m = 0; m < clen; m++) {
+								  coords[n][m] *= x;
+							 }
+							 areas[n].coords = coords[n].join(',');
+						}
+						previousWidth = document.body.clientWidth;
+						return true;
+					};
+				};
+
+				var imageMap0 = new ImageMap(document.getElementById('map0'), document.getElementById('img0'));
+				var imageMap1 = new ImageMap(document.getElementById('map1'), document.getElementById('img1'));
+				var imageMap2 = new ImageMap(document.getElementById('map2'), document.getElementById('img2'));
+				imageMap0.resize();
+				imageMap1.resize();
+				imageMap2.resize();
+
+				return;
+			};
+
+			function playaudio(im, row, col) {
+				var body = document.getElementsByTagName('body')[0];
+				var audio = document.getElementById('{0}_{1}{2}'.format(im, zeropad(row, 2), zeropad(col, 2)));
+				// Load audio if doesn't exist
+				if (audio == null) {
+					audio = document.createElement('audio');
+					audio.id = "{0}_{1}{2}".format(im, zeropad(row, 2), zeropad(col, 2));
+					audio.src = "audio/{0}_{1}_{2}.mp3".format(im, zeropad(row, 2), zeropad(col, 2));
+					body.appendChild(audio);
+				}
+				audio.play()
+			};
+
+			function toggleimg(img) {
+				if (img.getAttribute('data-roman-hidden') == 0) {
+					img.setAttribute('data-og-src', img.src);
+					img.src = img.getAttribute('data-roman-hidden-src');
+					img.setAttribute('data-roman-hidden', 1);
+				} else {
+					img.src = img.getAttribute('data-og-src');
+					img.setAttribute('data-roman-hidden', 0);
+				}
+			};
+
+			String.prototype.format = function () {
+				var args = [].slice.call(arguments);
+				return this.replace(/(\{\d+\})/g, function (a){
+					return args[+(a.substr(1,a.length-2))||0];
+				});
+			};
+
+			function zeropad(num, padlen) {
+				var pad_char = '0';
+				var pad = new Array(1 + padlen).join(pad_char);
+				return (pad + num).slice(-pad.length);
+			};
+		</script>
+	</head>
+
+	<body>
+		<div style="width:100%;">
+			<img id="img0" src="img/0.jpg" data-roman-hidden-src="img/0h.jpg" data-roman-hidden="0" width="100%" usemap="#map0"/>
+			<map name="map0" id="map0">
+				<area shape="rect" coords="60,45,115,90" href="#!" onclick="toggleimg(document.getElementById('img0'))"/>
+			</map>
+
+			<img id="img1" src="img/1.jpg" data-roman-hidden-src="img/1h.jpg" data-roman-hidden="0" width="100%" usemap="#map1"/>
+			<map name="map1" id="map1">
+				<area shape="rect" coords="60,45,115,100" href="#!" onclick="toggleimg(document.getElementById('img1'))"/>
+			</map>
+
+			<img id="img2" src="img/2.jpg" data-roman-hidden-src="img/2h.jpg" data-roman-hidden="0" width="100%" usemap="#map2"/>
+			<map name="map2" id="map2">
+				<area shape="rect" coords="62,45,117,95" href="#!" onclick="toggleimg(document.getElementById('img2'))"/>
+			</map>
+		</div>
+	</body>
+</html>
